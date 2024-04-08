@@ -1,0 +1,57 @@
+{
+  "options": [
+    {
+      "name": "Title",
+      "subOptions": []
+    },
+    {
+      "name": "Subtitle",
+      "subOptions": []
+    },
+    {
+      "name": "Field",
+      "subOptions": [
+        {
+          "name": "String",
+          "subOptions": []
+        },
+        {
+          "name": "Inner",
+          "subOptions": []
+        },
+        {
+          "name": "Checkbox",
+          "subOptions": []
+        },
+        {
+          "name": "Select",
+          "subOptions": []
+        },
+        {
+          "name": "Multiselect",
+          "subOptions": []
+        },
+        {
+          "name": "Date / DateTime",
+          "subOptions": []
+        },
+        {
+          "name": "Upload File",
+          "subOptions": []
+        },
+        {
+          "name": "Digital Signature Field",
+          "subOptions": []
+        }
+      ]
+    },
+    {
+      "name": "Button",
+      "subOptions": []
+    },
+    {
+      "name": "Image",
+      "subOptions": []
+    }
+  ]
+}
