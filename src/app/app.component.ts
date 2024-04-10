@@ -43,28 +43,73 @@ export class AppComponent {
         break;
       // String
       case 5:
-        element = this.renderer.createElement('input');
+        element = this.renderer.createElement('p');
+        element.textContent = 'Write your pargraph here';
         element.setAttribute('type', 'text');
+        this.renderer.addClass(element, 'element');
         break;
       // Inner
       case 6:
         element = this.renderer.createElement('input');
         element.setAttribute('type', 'text');
+        this.renderer.addClass(element, 'element');
         break;
       // Checkbox
       case 7:
         element = this.renderer.createElement('input');
-        element.setAttribute('type', 'text');
+        element.setAttribute('type', 'checkbox');
+        this.renderer.addClass(element, 'element-checkbox');
         break;
       // Select
       case 8:
-        element = this.renderer.createElement('input');
-        element.setAttribute('type', 'text');
+        element = this.renderer.createElement('select');
+
+        var option1 = document.createElement('option');
+        option1.text = 'Option 1';
+        option1.value = 'value1';
+        element.appendChild(option1);
+
+        var option2 = document.createElement('option');
+        option2.text = 'Option 2';
+        option2.value = 'value2';
+        element.appendChild(option2);
+
+        var option3 = document.createElement('option');
+        option3.text = 'Option 3';
+        option3.value = 'value3';
+        element.appendChild(option3);
+
+        var option4 = document.createElement('option');
+        option4.text = 'Option 4';
+        option4.value = 'value4';
+        element.appendChild(option4);
+        this.renderer.addClass(element, 'element-select');
         break;
       // Multiselect
       case 9:
-        element = this.renderer.createElement('input');
-        element.setAttribute('type', 'text');
+        element = this.renderer.createElement('select');
+        element.setAttribute('multiple', '');
+
+        var option1 = document.createElement('option');
+        option1.text = 'Option 1';
+        option1.value = 'value1';
+        element.appendChild(option1);
+
+        var option2 = document.createElement('option');
+        option2.text = 'Option 2';
+        option2.value = 'value2';
+        element.appendChild(option2);
+
+        var option3 = document.createElement('option');
+        option3.text = 'Option 3';
+        option3.value = 'value3';
+        element.appendChild(option3);
+
+        var option4 = document.createElement('option');
+        option4.text = 'Option 4';
+        option4.value = 'value4';
+        element.appendChild(option4);
+        this.renderer.addClass(element, 'element-select');
         break;
       // Date select
       case 10:
