@@ -11,7 +11,7 @@ import { AppServiceService } from 'src/app/service/app-service.service';
 export class SideMenuDrawerComponent implements OnInit {
   showSubMenu: boolean;
   menuOptions$: Observable<Array<Option>> | undefined;
-  @Output() stringOutput: EventEmitter<string> = new EventEmitter<string>();
+  @Output() typeIdOutput: EventEmitter<number> = new EventEmitter<number>();
   activeMenuItemIndex: number = -1;
 
   constructor(private service: AppServiceService) {
@@ -38,7 +38,7 @@ export class SideMenuDrawerComponent implements OnInit {
     this.showSubMenu = !this.showSubMenu;
   }
   //Here I send the selected element to the parent component to add it
-  addElementToGrid(suboptionName: string) {
-    this.stringOutput.emit(suboptionName);
+  addElementToGrid(typeId: number) {
+    this.typeIdOutput.emit(typeId);
   }
 }

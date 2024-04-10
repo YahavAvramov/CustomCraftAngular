@@ -31,13 +31,13 @@
       </svg>
       <a
         class="menu"
-        (click)="option.subOptions.length > 0 ? toggleSubMenu(i) : addElementToGrid(option.name)"
+        (click)="option.subOptions.length > 0 ? toggleSubMenu(i) : addElementToGrid(option.typeId)"
         [class.active]="isSubMenuOpen(i)"
         >{{ option.name }}</a
       >
       <ul *ngIf="isSubMenuOpen(i)">
         <li *ngFor="let suboption of option.subOptions">
-          <a (click)="addElementToGrid(suboption.name)">
+          <a (click)="addElementToGrid(suboption.typeId)">
             {{ suboption.name }}
           </a>
         </li>
