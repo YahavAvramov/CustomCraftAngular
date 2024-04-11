@@ -7,7 +7,7 @@ import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 })
 export class AppComponent {
   title = 'custom_craft_angular';
-
+  editMode = true;
   @ViewChild('container', { static: true }) container: ElementRef | undefined;
 
   constructor(private renderer: Renderer2) {}
@@ -38,7 +38,7 @@ export class AppComponent {
       // Image
       case 4:
         element = this.renderer.createElement('img');
-        element.setAttribute('src', './assets/image-icon.png'); // Set the source of the image
+        element.setAttribute('src', './assets/image-icon.png');
         this.renderer.addClass(element, 'element-img');
         break;
       // String

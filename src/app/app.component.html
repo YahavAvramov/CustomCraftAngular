@@ -1,4 +1,15 @@
 <app-side-menu-drawer (typeIdOutput)="addElementToGrid($event)"></app-side-menu-drawer>
-<div #container></div>
+<div class="icon-change-mode-container">
+  <img
+    src="./assets/exchange-icon.png"
+    alt="Edit Mode Icon"
+    class="icon-change-mode"
+    [class.rotate]="!editMode"
+    (click)="editMode = !editMode"
+  />
+  <div class="text">{{ editMode ? 'Edit mode' : 'Production mode' }}</div>
+</div>
 
-<app-multiselect></app-multiselect>
+<ng-container>
+  <div #container></div>
+</ng-container>
