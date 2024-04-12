@@ -1,18 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SideMenuDrawerComponent } from './components/side-menu-drawer/side-menu-drawer.component';
 import { HttpClientModule } from '@angular/common/http';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
-import { MultiSelectComponent } from './components/multi-select/multi-select.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ButtonDynamicComponent } from './components/elements/button-dynamic/button-dynamic.component';
 import { TitleComponent } from './components/elements/title/title.component';
@@ -22,20 +18,41 @@ import { StringComponent } from './components/elements/string/string.component';
 import { InnerComponent } from './components/elements/inner/inner.component';
 import { CheckboxComponent } from './components/elements/checkbox/checkbox.component';
 import { SelectComponent } from './components/elements/select/select.component';
-import { MultiselectComponent } from './components/elements/multiselect/multiselect.component';
 import { DateComponent } from './components/elements/date/date.component';
 import { UploadeFileComponent } from './components/elements/uploade-file/uploade-file.component';
-
+import { MatNativeDateModule, MatOption } from '@angular/material/core';
+import { MultiSelectComponent } from './components/elements/multi-select/multi-select.component';
 
 
 @NgModule({
-  declarations: [AppComponent, SideMenuDrawerComponent, MultiSelectComponent, ButtonDynamicComponent, TitleComponent, SubtitleComponent, ImageComponent, StringComponent, InnerComponent, CheckboxComponent, SelectComponent, MultiselectComponent, DateComponent, UploadeFileComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule 
-    ,MatFormFieldModule, MatSelectModule,
-     FormsModule, ReactiveFormsModule 
-     , BrowserAnimationsModule,
-     DragDropModule,
-    ],
+  declarations: [
+    AppComponent,
+    SideMenuDrawerComponent,
+    ButtonDynamicComponent,
+    TitleComponent,
+    SubtitleComponent,
+    ImageComponent,
+    StringComponent,
+    InnerComponent,
+    CheckboxComponent,
+    SelectComponent,
+    DateComponent,
+    UploadeFileComponent,
+    MultiSelectComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    DragDropModule,
+    MatDatepickerModule,    
+    MatNativeDateModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

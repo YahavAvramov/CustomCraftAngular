@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ComponentFactoryResolver, ElementRef, EmbeddedViewRef, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { ButtonDynamicComponent } from './components/elements/button-dynamic/button-dynamic.component';
 import { TitleComponent } from './components/elements/title/title.component';
 import { SubtitleComponent } from './components/elements/subtitle/subtitle.component';
@@ -7,7 +7,7 @@ import { StringComponent } from './components/elements/string/string.component';
 import { CheckboxComponent } from './components/elements/checkbox/checkbox.component';
 import { SelectComponent } from './components/elements/select/select.component';
 import { InnerComponent } from './components/elements/inner/inner.component';
-import { MultiSelectComponent } from './components/multi-select/multi-select.component';
+import { MultiSelectComponent } from './components/elements/multi-select/multi-select.component';
 import { DateComponent } from './components/elements/date/date.component';
 
 
@@ -18,18 +18,15 @@ import { DateComponent } from './components/elements/date/date.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements AfterViewInit{
+export class AppComponent {
   title = 'custom_craft_angular';
   public editMode: boolean = true; 
   @ViewChild('container', { static: true }) container: ElementRef | undefined;
   @ViewChild('container', { read: ViewContainerRef }) containerRef!: ViewContainerRef;
 
 
-  constructor(private renderer: Renderer2 , private cdr: ChangeDetectorRef , private resolver: ComponentFactoryResolver) {}
+  constructor(private renderer: Renderer2) {}
 
-  ngAfterViewInit(): void {
-    this.addCdkDragToDraggableElements();
-  }
   addElementToGrid(event: number): void {
     let element: HTMLElement;
 
@@ -101,26 +98,9 @@ export class AppComponent implements AfterViewInit{
         console.error('Invalid element type:', event);
         return;
     }
-    element.classList.add('draggable');
     if (this.container) {
       this.renderer.appendChild(this.container.nativeElement, element);
-     // this.addCdkDragToDraggableElements();
-      this.cdr.detectChanges();
-
     }
   }
-  
-  addCdkDragToDraggableElements(): void {
-    const draggableElements = document.querySelectorAll('.draggable') as NodeListOf<HTMLElement>;
-    draggableElements.forEach((element: HTMLElement) => {
-      element.setAttribute('cdkDrag', '');
-    });
-  }
-
-
-  
-  
-  
-  
   
 }

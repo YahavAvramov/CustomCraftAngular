@@ -1,6 +1,7 @@
-h3{
-    margin: 0 auto;
+h3 {
+    position: absolute;
     text-align: center;
-    width: 80%;
-    max-width: 600px;
-    }
+    left: 50%;
+    top: 50px;
+    transform: translateX(-50%);
+}

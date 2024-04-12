@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    position: absolute;
+    top: 5%; 
+    left: 50%; 
+    transform: translate(-50%); 
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.picker {
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px;
+    background-color: #fff;
+    color: #333;
+}
+
+.toggle {
+    cursor: pointer;
+    color: #007bff;
+    font-weight: bold;
+}
