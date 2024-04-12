@@ -6,6 +6,9 @@ import { ImageComponent } from './components/elements/image/image.component';
 import { StringComponent } from './components/elements/string/string.component';
 import { CheckboxComponent } from './components/elements/checkbox/checkbox.component';
 import { SelectComponent } from './components/elements/select/select.component';
+import { InnerComponent } from './components/elements/inner/inner.component';
+import { MultiSelectComponent } from './components/multi-select/multi-select.component';
+import { DateComponent } from './components/elements/date/date.component';
 
 
 
@@ -34,106 +37,54 @@ export class AppComponent implements AfterViewInit{
     switch (event) {
       // Title
       case 1:
-        const title = this.resolver.resolveComponentFactory(TitleComponent);
-        const titleComponentRef = this.containerRef.createComponent(title);
-        element = (titleComponentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+        const titleComponentRef = this.containerRef.createComponent(TitleComponent);
+        element = titleComponentRef.location.nativeElement;
         break;
       // Subtitle
       case 2:
-        const subtitle = this.resolver.resolveComponentFactory(SubtitleComponent);
-        const subtitleComponentRef = this.containerRef.createComponent(subtitle);
-        element = (subtitleComponentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        
+        const subtitleComponentRef = this.containerRef.createComponent(SubtitleComponent);
+        element = subtitleComponentRef.location.nativeElement; 
         break;
       // Button
       case 3:
-        const button = this.resolver.resolveComponentFactory(ButtonDynamicComponent);
-        const buttonComponentRef = this.containerRef.createComponent(button);
-        element = (buttonComponentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+
+      const buttonComponentRef = this.containerRef.createComponent(ButtonDynamicComponent);
+      element = buttonComponentRef.location.nativeElement; 
         break;
       // Image
       case 4:
-        const image = this.resolver.resolveComponentFactory(ImageComponent);
-        const imageComponentRef = this.containerRef.createComponent(image);
-        element = (imageComponentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+      const imageComponentRef = this.containerRef.createComponent(ImageComponent);
+      element = imageComponentRef.location.nativeElement; 
         break;
       // String
       case 5:
-        const string = this.resolver.resolveComponentFactory(StringComponent);
-        const stringComponentRef = this.containerRef.createComponent(string);
-        element = (stringComponentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+      const stringComponentRef = this.containerRef.createComponent(StringComponent);
+      element = stringComponentRef.location.nativeElement; 
         break;
       // Inner
       case 6:
-        element = this.renderer.createElement('input');
-        element.setAttribute('type', 'text');
-        this.renderer.addClass(element, 'element');
+      const innerComponentRef = this.containerRef.createComponent(InnerComponent);
+      element = innerComponentRef.location.nativeElement; 
         break;
       // Checkbox
       case 7:
-        const checkbox = this.resolver.resolveComponentFactory(CheckboxComponent);
-        const checkboxComponentRef = this.containerRef.createComponent(checkbox);
-        element = (checkboxComponentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+      const checkboxComponentRef = this.containerRef.createComponent(CheckboxComponent);
+      element = checkboxComponentRef.location.nativeElement; 
         break;
       // Select
       case 8:
-        const select = this.resolver.resolveComponentFactory(SelectComponent);
-        const selectComponentRef = this.containerRef.createComponent(select);
-        element = (selectComponentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-
-        // element = this.renderer.createElement('select');
-
-        // var option1 = document.createElement('option');
-        // option1.text = 'Option 1';
-        // option1.value = 'value1';
-        // element.appendChild(option1);
-
-        // var option2 = document.createElement('option');
-        // option2.text = 'Option 2';
-        // option2.value = 'value2';
-        // element.appendChild(option2);
-
-        // var option3 = document.createElement('option');
-        // option3.text = 'Option 3';
-        // option3.value = 'value3';
-        // element.appendChild(option3);
-
-        // var option4 = document.createElement('option');
-        // option4.text = 'Option 4';
-        // option4.value = 'value4';
-        // element.appendChild(option4);
-        // this.renderer.addClass(element, 'element-select');
+      const selectComponentRef = this.containerRef.createComponent(SelectComponent);
+      element = selectComponentRef.location.nativeElement; 
         break;
       // Multiselect
       case 9:
-        element = this.renderer.createElement('select');
-        element.setAttribute('multiple', '');
-
-        var option1 = document.createElement('option');
-        option1.text = 'Option 1';
-        option1.value = 'value1';
-        element.appendChild(option1);
-
-        var option2 = document.createElement('option');
-        option2.text = 'Option 2';
-        option2.value = 'value2';
-        element.appendChild(option2);
-
-        var option3 = document.createElement('option');
-        option3.text = 'Option 3';
-        option3.value = 'value3';
-        element.appendChild(option3);
-
-        var option4 = document.createElement('option');
-        option4.text = 'Option 4';
-        option4.value = 'value4';
-        element.appendChild(option4);
-        this.renderer.addClass(element, 'element-select');
+      const multiSelectComponentRef = this.containerRef.createComponent(MultiSelectComponent);
+      element = multiSelectComponentRef.location.nativeElement; 
         break;
       // Date select
       case 10:
-        element = this.renderer.createElement('input');
-        element.setAttribute('type', 'text');
+      const dateSelectComponentRef = this.containerRef.createComponent(DateComponent);
+      element = dateSelectComponentRef.location.nativeElement; 
         break;
       // Uploade file
       case 11:
@@ -145,7 +96,7 @@ export class AppComponent implements AfterViewInit{
         element = this.renderer.createElement('input');
         element.setAttribute('type', 'text');
         break;
-      // Add more cases for other element types as needed
+
       default:
         console.error('Invalid element type:', event);
         return;
@@ -165,6 +116,7 @@ export class AppComponent implements AfterViewInit{
       element.setAttribute('cdkDrag', '');
     });
   }
+
 
   
   
