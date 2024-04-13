@@ -22,6 +22,12 @@ import { DateComponent } from './components/elements/date/date.component';
 import { UploadeFileComponent } from './components/elements/uploade-file/uploade-file.component';
 import { MatNativeDateModule, MatOption } from '@angular/material/core';
 import { MultiSelectComponent } from './components/elements/multi-select/multi-select.component';
+import { EditElementDialogComponent } from './components/edit-element-dialog/edit-element-dialog.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule} from '@angular/material/dialog';
+
+
+
 
 
 @NgModule({
@@ -38,7 +44,8 @@ import { MultiSelectComponent } from './components/elements/multi-select/multi-s
     SelectComponent,
     DateComponent,
     UploadeFileComponent,
-    MultiSelectComponent
+    MultiSelectComponent,
+    EditElementDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +59,11 @@ import { MultiSelectComponent } from './components/elements/multi-select/multi-s
     DragDropModule,
     MatDatepickerModule,    
     MatNativeDateModule,
+    MatButtonModule,
+   MatDialogModule,
+
+   
+
   ],
   providers: [],
   bootstrap: [AppComponent],

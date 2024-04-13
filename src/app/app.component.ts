@@ -9,6 +9,8 @@ import { SelectComponent } from './components/elements/select/select.component';
 import { InnerComponent } from './components/elements/inner/inner.component';
 import { MultiSelectComponent } from './components/elements/multi-select/multi-select.component';
 import { DateComponent } from './components/elements/date/date.component';
+import { EditElementDialogComponent } from './components/edit-element-dialog/edit-element-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 
@@ -25,7 +27,7 @@ export class AppComponent {
   @ViewChild('container', { read: ViewContainerRef }) containerRef!: ViewContainerRef;
 
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2 , public dialog: MatDialog) {}
 
   addElementToGrid(event: number): void {
     let element: HTMLElement;
@@ -43,10 +45,13 @@ export class AppComponent {
         element = subtitleComponentRef.location.nativeElement; 
         break;
       // Button
+      // Button
       case 3:
-
-      const buttonComponentRef = this.containerRef.createComponent(ButtonDynamicComponent);
-      element = buttonComponentRef.location.nativeElement; 
+        const buttonComponentRef = this.containerRef.createComponent(ButtonDynamicComponent);
+        element = buttonComponentRef.location.nativeElement;
+        element.addEventListener('click', () => {
+          this.openDialog();
+        });
         break;
       // Image
       case 4:
@@ -101,6 +106,18 @@ export class AppComponent {
     if (this.container) {
       this.renderer.appendChild(this.container.nativeElement, element);
     }
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(EditElementDialogComponent, {
+      position: {
+        bottom: '50px',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
   
 }
