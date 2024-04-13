@@ -1,4 +1,4 @@
-import { Component, ElementRef, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { ButtonDynamicComponent } from './components/elements/button-dynamic/button-dynamic.component';
 import { TitleComponent } from './components/elements/title/title.component';
 import { SubtitleComponent } from './components/elements/subtitle/subtitle.component';
@@ -27,7 +27,7 @@ export class AppComponent {
   @ViewChild('container', { read: ViewContainerRef }) containerRef!: ViewContainerRef;
 
 
-  constructor(private renderer: Renderer2 , public dialog: MatDialog) {}
+  constructor(private renderer: Renderer2 , public dialog: MatDialog , private cdr: ChangeDetectorRef ) {}
 
   addElementToGrid(event: number): void {
     let element: HTMLElement;
@@ -38,19 +38,32 @@ export class AppComponent {
       case 1:
         const titleComponentRef = this.containerRef.createComponent(TitleComponent);
         element = titleComponentRef.location.nativeElement;
+        element.style.color = '#808080';
+        element.style.fontSize = '36px';
+        element.addEventListener('click', () => {
+          this.openDialog(element);
+        });
         break;
       // Subtitle
       case 2:
         const subtitleComponentRef = this.containerRef.createComponent(SubtitleComponent);
         element = subtitleComponentRef.location.nativeElement; 
+        element.style.fontSize = '24px';
+        element.style.color = '#2c7873';
+        element.addEventListener('click', () => {
+          this.openDialog(element);
+        });
         break;
-      // Button
       // Button
       case 3:
         const buttonComponentRef = this.containerRef.createComponent(ButtonDynamicComponent);
         element = buttonComponentRef.location.nativeElement;
+        element.style.width = '24px';
+        element.style.backgroundColor = '#007bff';
+        element.classList.add('button'); 
+        
         element.addEventListener('click', () => {
-          this.openDialog();
+          this.openDialog(element);
         });
         break;
       // Image
@@ -62,6 +75,11 @@ export class AppComponent {
       case 5:
       const stringComponentRef = this.containerRef.createComponent(StringComponent);
       element = stringComponentRef.location.nativeElement; 
+      element.style.fontSize = '24px';
+      element.style.color = '#2c7873';
+      element.addEventListener('click', () => {
+        this.openDialog(element);
+      });
         break;
       // Inner
       case 6:
@@ -108,16 +126,43 @@ export class AppComponent {
     }
   }
 
-  openDialog() {
+  openDialog(element: HTMLElement) {
+    
     const dialogRef = this.dialog.open(EditElementDialogComponent, {
       position: {
         bottom: '50px',
       },
+      data: { element: element }
+    });
+    dialogRef.componentInstance.sizeChanged.subscribe((size: number) => {
+      element.style.fontSize = size + 'px';
+      this.cdr.detectChanges(); 
+      console.log('Size changed:', size);
+    });
+    
+    dialogRef.componentInstance.colorChanged.subscribe((color: string) => {
+      element.style.color = color;
+      this.cdr.detectChanges(); 
+      console.log('Color changed:', color);
+    });
+    
+    dialogRef.componentInstance.textChanged.subscribe((text: string) => {
+      element.innerText = text;
+      this.cdr.detectChanges(); 
+      console.log('Text changed:', text);
+      // Add the cdkDrag attribute back to the element
+      this.renderer.setAttribute(element, 'cdkDrag', '');
+    });
+
+    dialogRef.componentInstance.urlChanged.subscribe((url: string) => {
+      element.setAttribute('href', url);
+      this.cdr.detectChanges(); 
+      console.log('URL changed:', url);
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
-  }
   
+  }
 }

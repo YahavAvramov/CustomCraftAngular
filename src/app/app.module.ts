@@ -30,6 +30,7 @@ import { MatDialogModule} from '@angular/material/dialog';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,7 @@ import { MatDialogModule} from '@angular/material/dialog';
     DateComponent,
     UploadeFileComponent,
     MultiSelectComponent,
-    EditElementDialogComponent
+    EditElementDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +62,8 @@ import { MatDialogModule} from '@angular/material/dialog';
     MatNativeDateModule,
     MatButtonModule,
    MatDialogModule,
+   BrowserModule, 
+
 
    
 
