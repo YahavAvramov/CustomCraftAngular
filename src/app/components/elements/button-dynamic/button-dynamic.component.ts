@@ -35,11 +35,12 @@ export class ButtonDynamicComponent implements ElementsAttribute {
       return this._size;
     }
 
-    _url: string = '';
+    private _url: string = '';
+
     @Input() set url(value: string) {
-      this.url = value;
+      this._url = value; 
     }
-  
+    
     get url(): string {
       return this._url;
     }

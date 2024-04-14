@@ -82,7 +82,7 @@ export class AppComponent {
       const imageComponentRef = this.containerRef.createComponent(ImageComponent);
       element = imageComponentRef.location.nativeElement; 
       element.addEventListener('click', () => {
-        this.openDialog(imageComponentRef , true);
+        this.openDialog(imageComponentRef , true , true);
       });
         break;
       // String
@@ -124,7 +124,7 @@ export class AppComponent {
     }
   }
 
-  openDialog(element: any , isElementContainUrl = false) {
+  openDialog(element: any , isElementContainUrl = false, biggerSizeOption = false) {
     
     const dialogRef = this.dialog.open(EditElementDialogComponent, {
       position: {
@@ -136,6 +136,7 @@ export class AppComponent {
         color: element.instance.color,
         text: element.instance.text,
         url: element.instance.url,
+        biggerSizeOption: biggerSizeOption
        }
     });
     dialogRef.componentInstance.sizeChanged.subscribe((size: number) => {    
@@ -151,9 +152,9 @@ export class AppComponent {
     });
 
     dialogRef.componentInstance.urlChanged.subscribe((url: string) => {
-     element.instance.url = url;
-     this.cd.detectChanges();
-    });  
+        element.instance.url = url;
+    });
+     
   }
 
 }

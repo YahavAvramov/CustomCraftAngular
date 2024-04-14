@@ -15,13 +15,14 @@ export class EditElementDialogComponent {
   @Output() colorChanged = new EventEmitter<string>();
   @Output() textChanged = new EventEmitter<string>();
   @Output() urlChanged = new EventEmitter<string>();
-  sizes = [5, 5.5, 6, 6.5, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72];
+  sizes:Array<number>;
   element: ComponentRef<Component>; 
 elementSize: number;
 elementColor: string;
 elementText: string;
 elementUrl: string;
 isElementContainUrl = false;
+biggerSizeOption = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     this.isElementContainUrl = data.isElementContainUrl;
@@ -30,6 +31,15 @@ isElementContainUrl = false;
     this.elementColor = data.color;
     this.elementText = data.text;
     this.elementUrl = data.url;
+    this.biggerSizeOption = data.biggerSizeOption;
+
+    if(!this.biggerSizeOption){
+      this.sizes = [5, 5.5, 6, 6.5, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72];
+    }
+    else{
+      this.sizes = [48, 72, 96, 120, 144, 192, 288, 384, 480, 576, 720, 864, 1008, 1152, 1296];
+    }
+
   }
 
   onSizeChange(size: number) {

@@ -37,9 +37,9 @@ export class ImageComponent implements ElementsAttribute{
 
     _url: string = './assets/image-icon.png';
     @Input() set url(value: string) {
-      this.url = value;
+      this._url = value; 
     }
-  
+    
     get url(): string {
       return this._url;
     }
