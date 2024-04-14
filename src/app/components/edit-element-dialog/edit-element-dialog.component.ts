@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { Component, ComponentRef, EventEmitter, Inject, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TitleComponent } from '../elements/title/title.component';
 
  
 @Component({
@@ -16,23 +17,29 @@ export class EditElementDialogComponent {
   @Output() textChanged = new EventEmitter<string>();
   @Output() urlChanged = new EventEmitter<string>();
   sizes = [5, 5.5, 6, 6.5, 7, 8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72];
-  element: HTMLElement; 
+  element: any; 
 elementSize: number;
-elementColor: string;
-elementText: string;
-elementUrl: string;
+elementColor: string = '';
+elementText: string = '';
+elementUrl: string =  '';
+isElementContainUrl = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+
+
     this.element = data.element; 
-    this.elementSize = parseInt(this.element.style.fontSize);
+this.elementSize = data.element.size;
+this.isElementContainUrl = data.isElementContainUrl;
+  
+    // console.log(this.elementSize);
+    // this.elementSize = parseInt(this.element.style.fontSize);
 
-    this.elementUrl = this.element.getAttribute('href') || '';
+    // this.elementUrl = this.element.getAttribute('href') || '';
+// console.log(this.data.componentInstance.color);
+//      this.elementColor = this.element.instance.color;
+//      console.log(this.elementColor);
+    // this.elementText = this.element.innerText;
 
-    this.elementColor = this.rgbToHex(this.element.style.color);
-    this.elementText = this.element.innerText;
-    console.log(parseInt(this.element.style.fontSize));
-    console.log(this.elementColor);
-    console.log(this.element.innerText); 
   }
 
   onSizeChange(size: number) {

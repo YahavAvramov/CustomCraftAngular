@@ -37,7 +37,7 @@ export class SideMenuDrawerComponent implements OnInit {
     console.log(this.showSubMenu);
     this.showSubMenu = !this.showSubMenu;
   }
-  //Here I send the selected element to the parent component to add it
+  //send the selected element to the parent component to add it
   addElementToGrid(typeId: number) {
     this.typeIdOutput.emit(typeId);
   }

@@ -19,11 +19,6 @@
           "typeId": 5
         },
         {
-          "name": "Inner",
-          "subOptions": [],
-          "typeId": 6
-        },
-        {
           "name": "Checkbox",
           "subOptions": [],
           "typeId": 7
@@ -42,16 +37,6 @@
           "name": "Date / DateTime",
           "subOptions": [],
           "typeId": 10
-        },
-        {
-          "name": "Upload File",
-          "subOptions": [],
-          "typeId": 11
-        },
-        {
-          "name": "Digital Signature Field",
-          "subOptions": [],
-          "typeId": 12
         }
       ]
     },

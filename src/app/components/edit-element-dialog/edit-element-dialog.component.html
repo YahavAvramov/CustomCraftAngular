@@ -2,18 +2,20 @@
     <ng-container>
         <mat-form-field appearance="fill" class="custom-form-field" cdkDrag>
             <mat-label>Select size option</mat-label>
-            <mat-select [formControl]="sizeForm" [(ngModel)]="elementSize" (ngModelChange)="onSizeChange($event)">
+            <mat-select [formControl]="sizeForm" (ngModelChange)="onSizeChange($event)">
                 <mat-option *ngFor="let size of sizes" [value]="size">{{size}}</mat-option>
             </mat-select>
         </mat-form-field>
     </ng-container>
 
-    <input type="color" id="colorpicker" class="colorpicker" [style.width]="'100%'"  [(ngModel)]="elementColor" (input)="onColorChange(colorpicker.value)" #colorpicker />
+    <input type="color" id="colorpicker" class="colorpicker" [style.width]="'100%'" [(ngModel)]="elementColor" (input)="onColorChange(colorpicker.value)" #colorpicker />
 
-    <input type="text" [(ngModel)]="elementText" placeholder="New text" (ngModelChange)="onTextChange(textInput.value)" #textInput>
-<ng-container>
-    <input type="url" [(ngModel)]="elementUrl" placeholder="Enter URL" (ngModelChange)="onUrlChange(urlInput.value)" #urlInput />
-</ng-container>
+    <input type="text" [(ngModel)]="elementText" placeholder="New text" class="input-field" (ngModelChange)="onTextChange(textInput.value)" #textInput>
+
+    <ng-container *ngIf="isElementContainUrl">
+        <input type="text" [(ngModel)]="elementUrl" placeholder="Enter URL" class="input-field" (ngModelChange)="onUrlChange(urlInput.value)" #urlInput />
+    </ng-container>
+
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">

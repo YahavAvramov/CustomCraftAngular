@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
+import {  Component, ElementRef, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { ButtonDynamicComponent } from './components/elements/button-dynamic/button-dynamic.component';
 import { TitleComponent } from './components/elements/title/title.component';
 import { SubtitleComponent } from './components/elements/subtitle/subtitle.component';
@@ -22,12 +22,14 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AppComponent {
   title = 'custom_craft_angular';
-  public editMode: boolean = true; 
+   editMode: boolean; 
   @ViewChild('container', { static: true }) container: ElementRef | undefined;
   @ViewChild('container', { read: ViewContainerRef }) containerRef!: ViewContainerRef;
 
 
-  constructor(private renderer: Renderer2 , public dialog: MatDialog , private cdr: ChangeDetectorRef ) {}
+  constructor(private renderer: Renderer2 , public dialog: MatDialog) {
+    this.editMode = true;
+  }
 
   addElementToGrid(event: number): void {
     let element: HTMLElement;
@@ -36,55 +38,57 @@ export class AppComponent {
     switch (event) {
       // Title
       case 1:
-        const titleComponentRef = this.containerRef.createComponent(TitleComponent);
+      const titleComponentRef = this.containerRef.createComponent(TitleComponent);
         element = titleComponentRef.location.nativeElement;
-        element.style.color = '#808080';
-        element.style.fontSize = '36px';
+        // element.style.color = '#808080';
+        // element.instance.size = 36; 
         element.addEventListener('click', () => {
-          this.openDialog(element);
+          this.openDialog(titleComponentRef);
         });
         break;
       // Subtitle
       case 2:
         const subtitleComponentRef = this.containerRef.createComponent(SubtitleComponent);
         element = subtitleComponentRef.location.nativeElement; 
-        element.style.fontSize = '24px';
-        element.style.color = '#2c7873';
+        // element.style.fontSize = '24px';
+        // element.style.color = '#2c7873';
         element.addEventListener('click', () => {
-          this.openDialog(element);
+          this.openDialog(subtitleComponentRef);
         });
         break;
       // Button
       case 3:
         const buttonComponentRef = this.containerRef.createComponent(ButtonDynamicComponent);
         element = buttonComponentRef.location.nativeElement;
-        element.style.width = '24px';
-        element.style.backgroundColor = '#007bff';
+     
         element.classList.add('button'); 
         
+        if (!this.editMode) {
+          element.addEventListener('click', () => {
+            window.open(buttonComponentRef.instance.url, '_blank');
+          });
+        } else {
         element.addEventListener('click', () => {
-          this.openDialog(element);
+          this.openDialog(buttonComponentRef , true);
         });
+      }
         break;
       // Image
       case 4:
       const imageComponentRef = this.containerRef.createComponent(ImageComponent);
       element = imageComponentRef.location.nativeElement; 
+      element.addEventListener('click', () => {
+        this.openDialog(imageComponentRef , true);
+      });
         break;
       // String
       case 5:
       const stringComponentRef = this.containerRef.createComponent(StringComponent);
       element = stringComponentRef.location.nativeElement; 
-      element.style.fontSize = '24px';
-      element.style.color = '#2c7873';
+    
       element.addEventListener('click', () => {
-        this.openDialog(element);
+        this.openDialog(stringComponentRef);
       });
-        break;
-      // Inner
-      case 6:
-      const innerComponentRef = this.containerRef.createComponent(InnerComponent);
-      element = innerComponentRef.location.nativeElement; 
         break;
       // Checkbox
       case 7:
@@ -106,16 +110,6 @@ export class AppComponent {
       const dateSelectComponentRef = this.containerRef.createComponent(DateComponent);
       element = dateSelectComponentRef.location.nativeElement; 
         break;
-      // Uploade file
-      case 11:
-        element = this.renderer.createElement('input');
-        element.setAttribute('type', 'text');
-        break;
-      // Digital Signature Field
-      case 12:
-        element = this.renderer.createElement('input');
-        element.setAttribute('type', 'text');
-        break;
 
       default:
         console.error('Invalid element type:', event);
@@ -126,43 +120,29 @@ export class AppComponent {
     }
   }
 
-  openDialog(element: HTMLElement) {
+  openDialog(element: any , isElementContainUrl = false) {
     
     const dialogRef = this.dialog.open(EditElementDialogComponent, {
       position: {
         bottom: '50px',
       },
-      data: { element: element }
+      data: { element: element, isElementContainUrl: isElementContainUrl }
     });
-    dialogRef.componentInstance.sizeChanged.subscribe((size: number) => {
-      element.style.fontSize = size + 'px';
-      this.cdr.detectChanges(); 
-      console.log('Size changed:', size);
+    dialogRef.componentInstance.sizeChanged.subscribe((size: number) => {    
+      element.instance.size = size; 
     });
     
     dialogRef.componentInstance.colorChanged.subscribe((color: string) => {
-      element.style.color = color;
-      this.cdr.detectChanges(); 
-      console.log('Color changed:', color);
+      element.instance.color = color;
     });
     
     dialogRef.componentInstance.textChanged.subscribe((text: string) => {
-      element.innerText = text;
-      this.cdr.detectChanges(); 
-      console.log('Text changed:', text);
-      // Add the cdkDrag attribute back to the element
-      this.renderer.setAttribute(element, 'cdkDrag', '');
+      element.instance.text = text;
     });
 
     dialogRef.componentInstance.urlChanged.subscribe((url: string) => {
-      element.setAttribute('href', url);
-      this.cdr.detectChanges(); 
-      console.log('URL changed:', url);
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  
+     element.instance.url = url;
+    });  
   }
+
 }
