@@ -1,27 +1,18 @@
-# CustomCraftAngular
+# About CustomCraftAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.13.
+CustomCraftAngular is a web application generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.13. 
 
-## Development server
+## Introduction
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+CustomCraftAngular allows users to create dynamic web content by adding elements and customizing their appearance dynamically.
 
-## Code scaffolding
+## How to Run
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+To run this project locally, you will need:
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Clone this project to your computer.
+2. Open a terminal and navigate to the project directory.
+3. Run the command `npm install` to install the project dependencies.
+4. Start the dummy JSON server by running the command `npm run start:server`. This will start the server at http://localhost:3000/options.
+5. Open a new terminal, navigate to the project directory, and run `ng serve` to start the Angular application.
+6. Open your browser and go to http://localhost:4200/ to view the application.
