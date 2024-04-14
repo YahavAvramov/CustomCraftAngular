@@ -2,7 +2,7 @@
     <ng-container>
         <mat-form-field appearance="fill" class="custom-form-field" cdkDrag>
             <mat-label>Select size option</mat-label>
-            <mat-select [formControl]="sizeForm" (ngModelChange)="onSizeChange($event)">
+            <mat-select [formControl]="sizeForm" [(ngModel)]="elementSize" (ngModelChange)="onSizeChange($event)">
                 <mat-option *ngFor="let size of sizes" [value]="size">{{size}}</mat-option>
             </mat-select>
         </mat-form-field>

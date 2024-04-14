@@ -1,4 +1,4 @@
-import {  Component, ElementRef, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
+import {  ChangeDetectorRef, Component, ElementRef, Renderer2, ViewChild, ViewContainerRef } from '@angular/core';
 import { ButtonDynamicComponent } from './components/elements/button-dynamic/button-dynamic.component';
 import { TitleComponent } from './components/elements/title/title.component';
 import { SubtitleComponent } from './components/elements/subtitle/subtitle.component';
@@ -6,7 +6,6 @@ import { ImageComponent } from './components/elements/image/image.component';
 import { StringComponent } from './components/elements/string/string.component';
 import { CheckboxComponent } from './components/elements/checkbox/checkbox.component';
 import { SelectComponent } from './components/elements/select/select.component';
-import { InnerComponent } from './components/elements/inner/inner.component';
 import { MultiSelectComponent } from './components/elements/multi-select/multi-select.component';
 import { DateComponent } from './components/elements/date/date.component';
 import { EditElementDialogComponent } from './components/edit-element-dialog/edit-element-dialog.component';
@@ -22,14 +21,20 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AppComponent {
   title = 'custom_craft_angular';
-   editMode: boolean; 
+ 
   @ViewChild('container', { static: true }) container: ElementRef | undefined;
   @ViewChild('container', { read: ViewContainerRef }) containerRef!: ViewContainerRef;
 
-
-  constructor(private renderer: Renderer2 , public dialog: MatDialog) {
-    this.editMode = true;
+  _editMode: boolean = true;  
+   set editMode(value: boolean) {
+    this._editMode = value;
   }
+
+  get editMode(): boolean {
+    return this._editMode;
+  }
+
+  constructor(private renderer: Renderer2 , public dialog: MatDialog, private cd: ChangeDetectorRef) {}
 
   addElementToGrid(event: number): void {
     let element: HTMLElement;
@@ -50,7 +55,7 @@ export class AppComponent {
       case 2:
         const subtitleComponentRef = this.containerRef.createComponent(SubtitleComponent);
         element = subtitleComponentRef.location.nativeElement; 
-        // element.style.fontSize = '24px';
+        element.style.fontSize = '24px';
         // element.style.color = '#2c7873';
         element.addEventListener('click', () => {
           this.openDialog(subtitleComponentRef);
@@ -60,9 +65,8 @@ export class AppComponent {
       case 3:
         const buttonComponentRef = this.containerRef.createComponent(ButtonDynamicComponent);
         element = buttonComponentRef.location.nativeElement;
-     
-        element.classList.add('button'); 
-        
+
+        console.log(this._editMode);
         if (!this.editMode) {
           element.addEventListener('click', () => {
             window.open(buttonComponentRef.instance.url, '_blank');
@@ -126,7 +130,13 @@ export class AppComponent {
       position: {
         bottom: '50px',
       },
-      data: { element: element, isElementContainUrl: isElementContainUrl }
+      data: { element: element, 
+        isElementContainUrl: isElementContainUrl,
+        fontSize: element.instance.size,
+        color: element.instance.color,
+        text: element.instance.text,
+        url: element.instance.url,
+       }
     });
     dialogRef.componentInstance.sizeChanged.subscribe((size: number) => {    
       element.instance.size = size; 
@@ -142,6 +152,7 @@ export class AppComponent {
 
     dialogRef.componentInstance.urlChanged.subscribe((url: string) => {
      element.instance.url = url;
+     this.cd.detectChanges();
     });  
   }
 
