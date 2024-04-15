@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ElementsAttribute } from 'src/app/interfaces/elements-attribute';
 
 @Component({
@@ -8,12 +8,23 @@ import { ElementsAttribute } from 'src/app/interfaces/elements-attribute';
 })
 export class StringComponent implements ElementsAttribute {
 
+@Output() textChange = new EventEmitter<string>();
+
   private _text: string = 'Write your paragraph here';
   @Input() set text(value: string) {
     this._text = value;
+    this.textChange.emit(this._text);
   }
   get text(): string {
     return this._text;
+  }
+  private _index: number | undefined; 
+  set index(value: number | undefined) {
+    this._index = value;
+  }
+
+  get index(): number | undefined {
+    return this._index;
   }
   
   

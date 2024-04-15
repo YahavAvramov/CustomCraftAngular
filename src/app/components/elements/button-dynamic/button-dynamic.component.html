@@ -1,17 +1,5 @@
 
-<ng-container *ngIf="url; else buttonTemplate">
-    <ng-container *ngTemplateOutlet="linkTemplate"></ng-container>
-</ng-container>
-
-<ng-template #linkTemplate>
-    <a [href]="url">
-        <button cdkDrag [style.font-size.px]="size" [style.background-color]="color">{{ text }}</button>
-    </a>
-</ng-template>
-
-<ng-template #buttonTemplate>
-    <button cdkDrag [style.font-size.px]="size" [style.background-color]="color">{{ text }}</button>
-</ng-template>
+    <button cdkDrag [style.font-size.px]="size" [style.background-color]="color" (click)="sendApiRequest()">{{ text }}</button>
 
 
   

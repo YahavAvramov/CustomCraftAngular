@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ElementsAttribute } from 'src/app/interfaces/elements-attribute';
+import { AppServiceService } from 'src/app/service/app-service.service';
 
 @Component({
   selector: 'app-button-dynamic',
@@ -8,6 +9,7 @@ import { ElementsAttribute } from 'src/app/interfaces/elements-attribute';
 })
 export class ButtonDynamicComponent implements ElementsAttribute {
 
+  constructor(private service: AppServiceService) { }
   private _text: string = 'Click me';
   @Input() set text(value: string) {
     this._text = value;
@@ -43,5 +45,9 @@ export class ButtonDynamicComponent implements ElementsAttribute {
     
     get url(): string {
       return this._url;
+    }
+
+    sendApiRequest(){
+      
     }
 }

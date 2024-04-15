@@ -1,6 +1,6 @@
-
-    <div class="container" cdkDrag>
-    <input matInput [matDatepicker]="picker" class="picker">
+<div class="container" cdkDrag>
+    <input matInput [matDatepicker]="picker" class="picker" (dateInput)="onDateInput($event)">
     <mat-datepicker-toggle matSuffix [for]="picker" class="toggle"></mat-datepicker-toggle>
     <mat-datepicker #picker class="date-picker"></mat-datepicker>
-</div>
+  </div>
+  
