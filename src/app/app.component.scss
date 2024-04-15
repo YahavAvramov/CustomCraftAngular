@@ -38,3 +38,11 @@
   color: #555;
   text-align: center;
 }
+
+.custom-dialog-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+

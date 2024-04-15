@@ -11,6 +11,8 @@ import { DateComponent } from './components/elements/date/date.component';
 import { EditElementDialogComponent } from './components/edit-element-dialog/edit-element-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AppServiceService } from './service/app-service.service';
+import { url } from 'inspector';
+import { SuccessDialogComponent } from './components/success-dialog/success-dialog.component';
 
 
 
@@ -56,7 +58,6 @@ export class AppComponent {
         titleComponentRef.instance.textChange.subscribe(() => {
             // Update the value at the stored index with new text
             this.service.stringArray[indexTitle] = titleComponentRef.instance.text;
-            console.log(this.service.stringArray);
         });
         element.addEventListener('click', () => {
             this.openDialog(titleComponentRef);
@@ -76,7 +77,6 @@ export class AppComponent {
         subtitleComponentRef.instance.textChange.subscribe(() => {
             // Update the value at the stored index with new text
             this.service.stringArray[indexSubtitle] = subtitleComponentRef.instance.text;
-            console.log(this.service.stringArray);
         });
         element.addEventListener('click', () => {
           this.openDialog(subtitleComponentRef);
@@ -93,7 +93,15 @@ export class AppComponent {
           else{
            if(buttonComponentRef.instance.url){
            this.service.sendApiRequest(buttonComponentRef.instance.url).subscribe((data: any) => {
-            
+            const dialogRef = this.dialog.open(SuccessDialogComponent, {
+              panelClass: 'custom-dialog-container', 
+              data: { data: data , url: buttonComponentRef.instance.url }
+            });
+          
+            dialogRef.afterClosed().subscribe(result => {
+              // Handle dialog closed event here, if needed
+              console.log('Dialog closed with result:', result);
+            });
            });
            }
            else{
@@ -116,7 +124,6 @@ export class AppComponent {
         imageComponentRef.instance.imageUrlChange.subscribe((newImageUrl: string) => {
             // Update the value at the stored index with new image URL
             this.service.imageUrls[indexImage] = newImageUrl;
-            console.log(this.service.imageUrls);
         });
     
         element.addEventListener('click', () => {
@@ -138,7 +145,6 @@ export class AppComponent {
           stringComponentRef.instance.textChange.subscribe(() => {
               // Update the value at the stored index with thenew text
               this.service.stringArray[indexString] = stringComponentRef.instance.text;
-              console.log(this.service.stringArray);
           });
           element.addEventListener('click', () => {
             this.openDialog(stringComponentRef);
@@ -174,7 +180,6 @@ export class AppComponent {
         selectComponentRef.instance.selectionChange.subscribe((newValue: any) => {
             // Update the value at the stored index with new selection
             this.service.stringArray[indexSelect] = newValue;
-            console.log(this.service.stringArray);
         });
         break;
       // Multiselect
@@ -193,7 +198,6 @@ export class AppComponent {
         multiSelectComponentRef.instance.selectionChange.subscribe((selectedOptions: string[]) => {
             // Update the value at the stored index with new selected options
             this.service.multiSelectedOptions[indexMultiSelect] = selectedOptions;
-            console.log(this.service.multiSelectedOptions);
         });
     
         break;
@@ -213,7 +217,6 @@ export class AppComponent {
         dateSelectComponentRef.instance.dateChange.subscribe((newDate: Date) => {
             // Update the value at the stored index with new date
             this.service.dateSelected[indexDateSelect] = newDate;
-            console.log(this.service.dateSelected);
         });
     
         break;

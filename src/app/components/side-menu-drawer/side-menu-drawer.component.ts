@@ -34,7 +34,6 @@ export class SideMenuDrawerComponent implements OnInit {
     return this.activeMenuItemIndex === index;
   }
   toggleMenu() {
-    console.log(this.showSubMenu);
     this.showSubMenu = !this.showSubMenu;
   }
   //send the selected element to the parent component to add it

@@ -25,6 +25,7 @@ import { MultiSelectComponent } from './components/elements/multi-select/multi-s
 import { EditElementDialogComponent } from './components/edit-element-dialog/edit-element-dialog.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule} from '@angular/material/dialog';
+import { SuccessDialogComponent } from './components/success-dialog/success-dialog.component';
 
 
 
@@ -47,6 +48,7 @@ import { MatDialogModule} from '@angular/material/dialog';
     UploadeFileComponent,
     MultiSelectComponent,
     EditElementDialogComponent,
+    SuccessDialogComponent,
   ],
   imports: [
     BrowserModule,
