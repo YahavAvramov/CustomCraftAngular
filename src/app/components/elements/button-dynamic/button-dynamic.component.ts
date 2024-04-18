@@ -46,8 +46,4 @@ export class ButtonDynamicComponent implements ElementsAttribute {
     get url(): string {
       return this._url;
     }
-
-    sendApiRequest(){
-      
-    }
 }
