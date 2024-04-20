@@ -1,13 +1,13 @@
 button {
   position: absolute;
-    margin-left: 50%;
-    transform: translateX(-50%);
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
     padding: 10px 20px;
     font-size: 16px;
     border: none;
     border-radius: 4px;
     background-color: #007bff;
     color: #fff;
-    cursor: pointer;
     transition: background-color 0.3s ease;
   }

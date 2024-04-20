@@ -2,5 +2,7 @@ p{
     position: absolute;
     margin: 0 auto;
     text-align: center;
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
 }

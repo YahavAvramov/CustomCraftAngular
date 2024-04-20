@@ -4,8 +4,9 @@
     justify-content: center; 
     position: absolute;
     top: 5%; 
-    left: 50%; 
-    transform: translate(-50%); 
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
     background-color: #f2f2f2;
     padding: 10px;
     border-radius: 5px;
